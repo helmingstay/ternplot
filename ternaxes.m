@@ -28,6 +28,9 @@ percentage = false;
 xoffset = 0.25;
 yoffset = 0.01;
 
+% disable with 0
+ticklen = 0.025;
+
 % get hold state
 cax = newplot;
 next = lower(get(cax,'NextPlot'));
@@ -96,7 +99,17 @@ if ~hold_state
 	[lxa, lya] = terncoords(zerocomp, 1-majorticks, majorticks);
 	text(lxa-0.035, lya+0.09, labels);
 	
+    %% modify majorticks to run into "negative"
+    %% get coord via terncoords
+    newzero = zerocomp-ticklen;
+    newresid = 1-majorticks;
+    [txc, tyc] = terncoords(1-majorticks, majorticks, zerocomp-ticklen);
+    %% b is not like the others
+    [txb, tyb] = terncoords(majorticks, zerocomp, 1-majorticks+ticklen); % fB = 1-fA
+	[txa, tya] = terncoords(newzero, 1-majorticks, majorticks);
+
 	nlabels = length(labels)-1;
+
 	for i = 1:nlabels
         plot([lxa(i+1) lxb(nlabels - i + 2)], [lya(i+1) lyb(nlabels - i + 2)], ls, 'color', tc, 'linewidth',0.25,...
            'handlevisibility','off');
@@ -104,6 +117,9 @@ if ~hold_state
            'handlevisibility','off');
         plot([lxc(i+1) lxa(nlabels - i + 2)], [lyc(i+1) lya(nlabels - i + 2)], ls, 'color', tc, 'linewidth',0.25,...
            'handlevisibility','off');
+        plot([lxa(i+1) txa(i+1)], [lya(i+1) tya(i+1)], '-', 'color', tc, 'linewidth',0.25);
+        plot([lxb(i+1) txb(i+1)], [lyb(i+1) tyb(i+1)], '-', 'color', tc, 'linewidth',0.25);
+        plot([lxc(i+1) txc(i+1)], [lyc(i+1) tyc(i+1)], '-', 'color', tc, 'linewidth',0.25);
 	end;
 end;
 
