@@ -101,12 +101,9 @@ if ~hold_state
 	
     %% modify majorticks to run into "negative"
     %% get coord via terncoords
-    newzero = zerocomp-ticklen;
-    newresid = 1-majorticks;
-    [txc, tyc] = terncoords(1-majorticks, majorticks, zerocomp-ticklen);
-    %% b is not like the others
+	[txa, tya] = terncoords(zerocomp-ticklen, 1-majorticks, majorticks);
     [txb, tyb] = terncoords(majorticks, zerocomp, 1-majorticks+ticklen); % fB = 1-fA
-	[txa, tya] = terncoords(newzero, 1-majorticks, majorticks);
+    [txc, tyc] = terncoords(1-majorticks+ticklen, majorticks, zerocomp-ticklen);
 
 	nlabels = length(labels)-1;
 
@@ -117,8 +114,12 @@ if ~hold_state
            'handlevisibility','off');
         plot([lxc(i+1) lxa(nlabels - i + 2)], [lyc(i+1) lya(nlabels - i + 2)], ls, 'color', tc, 'linewidth',0.25,...
            'handlevisibility','off');
+        %% axis ticks
+        %% right
         plot([lxa(i+1) txa(i+1)], [lya(i+1) tya(i+1)], '-', 'color', tc, 'linewidth',0.25);
+        %% left
         plot([lxb(i+1) txb(i+1)], [lyb(i+1) tyb(i+1)], '-', 'color', tc, 'linewidth',0.25);
+        %% bottom
         plot([lxc(i+1) txc(i+1)], [lyc(i+1) tyc(i+1)], '-', 'color', tc, 'linewidth',0.25);
 	end;
 end;
