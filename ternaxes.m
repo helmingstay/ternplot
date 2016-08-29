@@ -101,9 +101,12 @@ if ~hold_state
 	
     %% modify majorticks to run into "negative"
     %% get coord via terncoords
-	[txa, tya] = terncoords(zerocomp-ticklen, 1-majorticks, majorticks);
-    [txb, tyb] = terncoords(majorticks, zerocomp, 1-majorticks+ticklen); % fB = 1-fA
-    [txc, tyc] = terncoords(1-majorticks+ticklen, majorticks, zerocomp-ticklen);
+    %% right
+	[txa, tya] = terncoords(zerocomp-ticklen, 1-majorticks, majorticks+ticklen);
+    %% left
+    [txb, tyb] = terncoords(majorticks+ticklen, zerocomp-ticklen, 1-majorticks); % fB = 1-fA
+    %% bottom
+    [txc, tyc] = terncoords(1-majorticks, majorticks, zerocomp-ticklen);
 
 	nlabels = length(labels)-1;
 
