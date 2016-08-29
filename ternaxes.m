@@ -89,15 +89,15 @@ if ~hold_state
     
 	% Plot right labels (no c - only b a)
     [lxc, lyc] = terncoords(1-majorticks, majorticks, zerocomp);
-	text(lxc+0.05, lyc-0.025, [repmat('  ', length(labels), 1) labels]);
+	text(lxc+0.04, lyc-0.035, [repmat('  ', length(labels), 1) labels]);
     
 	% Plot bottom labels (no b - only a c)
     [lxb, lyb] = terncoords(majorticks, zerocomp, 1-majorticks); % fB = 1-fA
-	text(lxb-0.115, lyb-0.065, labels, 'VerticalAlignment', 'Top');
+	text(lxb-0.10, lyb-0.02, labels, 'VerticalAlignment', 'Top');
 	
 	% Plot left labels (no a, only c b)
 	[lxa, lya] = terncoords(zerocomp, 1-majorticks, majorticks);
-	text(lxa-0.035, lya+0.09, labels);
+	text(lxa-0.02, lya+0.09, labels);
 	
     %% modify majorticks to run into "negative"
     %% get coord via terncoords

@@ -60,8 +60,8 @@ end;
 [x, y] = terncoords(fA, fB, fC);
 
 % Sort data points in x order
-[x, i] = sort(x);
-y = y(i);
+% [x, i] = sort(x);
+% y = y(i);
 
 % Make ternary axes
 [hold_state, cax, next] = ternaxes(majors);
